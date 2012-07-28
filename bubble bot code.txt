@@ -1,0 +1,164 @@
+
+int trayButton = 0;
+int trayStatus = 0;
+int dirPin = 3;
+int motionPin = 4;
+int ledPin = 13;
+int timer1 = 1;
+int timer2 = 0;
+int timer3 = 0;
+int dire = 0;
+
+
+//set pin use
+void setup() {                
+  pinMode(2, INPUT);
+  pinMode(3, OUTPUT);     
+  pinMode(4, OUTPUT);
+  pinMode(12, INPUT);
+  pinMode(13, OUTPUT);
+
+// open serial port for debug
+Serial.begin(9600);
+
+// set pins
+  digitalWrite(2, HIGH);
+  digitalWrite(3, HIGH);
+  digitalWrite(4, LOW);
+  digitalWrite(13, LOW);
+}
+
+
+// lets get started
+void loop() 
+{
+  
+ // cycle counters
+  timer1 = ( timer1 + 1 );
+ trayStatus = ( trayStatus + 1 );
+// lets set a timer
+
+if (timer1 % 100 == 0) 
+{
+
+Serial.print("Timer1 = "); 
+Serial.print(timer1);
+
+Serial.print(" switch one = ");
+trayButton = digitalRead(2);
+Serial.print(trayButton);
+
+Serial.print(" dire = ");
+Serial.println(dire);
+
+}
+
+if (trayStatus > 1500)
+  {
+  if (trayButton == 0)
+   {
+  Serial.println("Button is DOWN!!!");
+   delay(5000);
+  
+  
+  Serial.print("Timer1 = "); 
+Serial.print(timer1);
+
+Serial.print(" switch one = ");
+trayButton = digitalRead(2);
+Serial.print(trayButton);
+
+Serial.print(" dire = ");
+Serial.println(dire);
+    trayStatus = 1;
+    timer1 = 7501;
+  delay(5000);
+   
+     }
+
+
+}
+
+
+
+  
+ if ( timer1 > 7200)
+ {  
+    delay(3000);  
+   timer1 = 9
+   ;
+   
+   
+  // timer1 = (timer1 + 1);
+   trayStatus = 1;
+   
+   dire = digital
+   Read(3);
+   
+  if (dire == 1){
+    digitalWrite(3,LOW);
+    dire = 3;    
+    Serial.print(dire);
+    Serial.print("   Timer 1= ");  
+    Serial.println(timer1);
+  }
+
+ else{
+     
+   digitalWrite(3,HIGH);
+   dire = 4;  
+   Serial.print(dire);
+   Serial.print("   Timer 1= ");  
+   Serial.println(timer1);
+  
+  }
+   
+   
+   
+ }
+ else
+ {
+   timer1 = (timer1 + 1);
+ }  
+   
+ 
+ 
+ 
+ // while (timer1 > 500)
+ // {
+ //   timer1 = (timer1 + 1);
+ //   digitalWrite(3, HIGH); 
+ //   Serial.print("While > "); 
+ // }
+  
+ // while (timer1 < 500);
+ // {
+ //   timer1 = (timer1 + 1);
+ //   digitalWrite(3, LOW);
+ //   Serial.print("While < ");
+ // }
+  
+  
+// stepper motion  
+ // pulse on
+ if ( timer1 > 1500 )
+ {
+ // Serial.print("Driver go!");
+   digitalWrite(4, HIGH);
+   digitalWrite(13, HIGH);  
+   //Serial.print("Status of pin 4 : ");
+   //Serial.println(motionPin);
+    delay(1); 
+    
+ // pulse off 
+   digitalWrite(4, LOW); 
+   digitalWrite(13, LOW);
+
+   delay(1);   
+}
+
+
+
+
+
+}
